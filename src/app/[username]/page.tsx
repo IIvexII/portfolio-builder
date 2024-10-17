@@ -1,39 +1,56 @@
 import Image from 'next/image';
-import ProfileImage from '@/assets/zafeer-image.png';
+import { Roboto_Mono } from 'next/font/google';
 import {
   GitHubLogoIcon,
   InstagramLogoIcon,
   LinkedInLogoIcon,
-  TwitterLogoIcon,
 } from '@radix-ui/react-icons';
+
 import { Button } from '@/components/ui/button';
+import { ThemeToggleButton } from './_components/theme-toggle-btn';
+import ProfileImage from '@/assets/zafeer.png';
+import Link from 'next/link';
+
+const robotoMono = Roboto_Mono({
+  weight: ['200', '500', '700'],
+  subsets: ['latin-ext'],
+});
 
 export default function PortfolioPage() {
   return (
     <>
-      <main>
-        <section>
-          <div>
+      <main className={`${robotoMono.className}`}>
+        {/* Hero Section */}
+        <section className='flex items-center justify-center gap-6 min-h-screen'>
+          {/* Left Part */}
+          <div className='w-1/2 max-w-[400px] flex flex-col items-start gap-4'>
             <h1 className='text-5xl font-bold'>
               Zafeer <br /> Hafeez
             </h1>
-            <h2>Fullstack Developer</h2>
+            <h2 className='text-xl font-light'>Fullstack Developer</h2>
             {/* Social Icons */}
             <div className='flex gap-6 h-16'>
-              <LinkedInLogoIcon width={30} height={30} />
-              <InstagramLogoIcon width={30} height={30} />
-              <GitHubLogoIcon width={30} height={30} />
+              <Link href='https://www.linkedin.com/in/zafeer-hafeez/' passHref>
+                <LinkedInLogoIcon width={30} height={30} />
+              </Link>
+              <Link href='https://www.instagram.com/zafeerhafeez/' passHref>
+                <InstagramLogoIcon width={30} height={30} />
+              </Link>
+              <Link href='https://github.com/iivexII/' passHref>
+                <GitHubLogoIcon width={30} height={30} />
+              </Link>
             </div>
 
             {/* tag line */}
-            <p>
-              With a passion for developing modern React web apps for commercial
+            <p className='w-3/4 text-lg hyphens-auto text-justify'>
+              With a passion for developing modern web apps for commercial
               businesses.
             </p>
-            <Button className='bg-blue-500 text-xl px-6 py-6 rounded-2xl hover:scale-105 hover:bg-blue-500 transition-all duration-300 dark:bg-white dark:hover:bg-white'>
+            <Button className='bg-gradient-to-br from-purple-500 to-purple-600 text-xl px-6 py-6 rounded-2xl hover:scale-105 transition-all duration-200 dark:bg-none dark:bg-white dark:hover:bg-white'>
               Resume
             </Button>
           </div>
+          {/* Right Part */}
           <div className='relative bg-gradient-to-tr from-purple-900 to-purple-500 rounded-full flex items-center justify-center w-96 h-96 overflow-clip'>
             <Image
               src={ProfileImage}
@@ -42,6 +59,8 @@ export default function PortfolioPage() {
             />
           </div>
         </section>
+        {/* theme button */}
+        <ThemeToggleButton className='fixed bottom-6 right-6' />
       </main>
     </>
   );
