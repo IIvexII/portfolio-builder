@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import { Roboto_Mono } from 'next/font/google';
+import { Roboto_Mono, Rubik } from 'next/font/google';
+
 import {
   GitHubLogoIcon,
   InstagramLogoIcon,
@@ -10,21 +11,37 @@ import { Button } from '@/components/ui/button';
 import { ThemeToggleButton } from './_components/theme-toggle-btn';
 import ProfileImage from '@/assets/zafeer.png';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
-const robotoMono = Roboto_Mono({
+const robotoMonoFont = Roboto_Mono({
   weight: ['200', '500', '700'],
+  subsets: ['latin-ext'],
+});
+
+const rubikFont = Rubik({
+  weight: ['900'],
   subsets: ['latin-ext'],
 });
 
 export default function PortfolioPage() {
   return (
     <>
-      <main className={`${robotoMono.className}`}>
+      <main
+        className={cn(
+          robotoMonoFont.className,
+          'text-slate-800 dark:text-slate-100'
+        )}
+      >
         {/* Hero Section */}
         <section className='flex items-center justify-center gap-6 min-h-screen'>
           {/* Left Part */}
-          <div className='w-1/2 max-w-[400px] flex flex-col items-start gap-4'>
-            <h1 className='text-5xl font-bold'>
+          <div className='w-1/2 max-w-[500px] flex flex-col items-start gap-4'>
+            <h1
+              className={cn(
+                rubikFont.className,
+                'text-5xl font-bold tracking-widest'
+              )}
+            >
               Zafeer <br /> Hafeez
             </h1>
             <h2 className='text-xl font-light'>Fullstack Developer</h2>
@@ -50,8 +67,8 @@ export default function PortfolioPage() {
               Resume
             </Button>
           </div>
-          {/* Right Part */}
-          <div className='relative bg-gradient-to-tr from-purple-900 to-purple-500 rounded-full flex items-center justify-center w-96 h-96 overflow-clip'>
+          {/* Right Part - Picture */}
+          <div className='relative bg-gradient-to-tr from-purple-900 to-purple-500 rounded-full flex items-center justify-center w-80 h-80 overflow-clip'>
             <Image
               src={ProfileImage}
               alt='Image of Zafeer Hafeez Laughing'
